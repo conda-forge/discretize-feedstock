@@ -25,7 +25,7 @@ requirements:
     - python
     - {{ pin_compatible('numpy') }}
     - scipy >=0.13
-    - pymatsolver >=0.1.2  # [not osx]
+    - pymatsolver >=0.1.2
     - properties
     - vectormath
 
