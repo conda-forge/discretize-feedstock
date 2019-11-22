@@ -10,6 +10,7 @@ source:
 
 build:
   number: 0
+  skip: True  # [py2k]
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
@@ -24,7 +25,7 @@ requirements:
     - python
     - {{ pin_compatible('numpy') }}
     - scipy >=0.13
-    - pymatsolver >=0.1.2
+    - pymatsolver >=0.1.2  # [not osx]
     - properties
     - vectormath
 
