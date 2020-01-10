@@ -200,4 +200,4 @@ Feedstock Maintainers
 =====================
 
 * [@lheagy](https://github.com/lheagy/)
-
+* [@jcapriot](https://github.com/jcapriot)
