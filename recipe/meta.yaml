@@ -1,4 +1,4 @@
-{% set version = "0.4.10" %}
+{% set version = "0.4.12" %}
 
 package:
   name: discretize
@@ -6,11 +6,11 @@ package:
 
 source:
   url: https://pypi.io/packages/source/d/discretize/discretize-{{ version }}.tar.gz
-  sha256: ba05bd02fb1b04ed95f626936dc72908ae4a15fb8909c048bebfaa17a8bf4ef7
+  sha256: b90ba8ab32c4009c4b6af1962f27a15bc69d47b4d752eaf71c033be0551d2387
 
 build:
   number: 0
-  script: "{{ PYTHON }} -m pip install . -vv"
+  script: "{{ PYTHON }} -m pip install . --no-deps -vv"
   skip: True  # [py2k]
 
 requirements:
@@ -25,7 +25,6 @@ requirements:
     - python
     - {{ pin_compatible('numpy') }}
     - scipy >=0.13
-    - pymatsolver >=0.1.2
     - properties
     - vectormath
 
