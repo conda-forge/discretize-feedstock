@@ -1,4 +1,4 @@
-{% set version = "0.4.12" %}
+{% set version = "0.4.13" %}
 
 package:
   name: discretize
@@ -6,12 +6,12 @@ package:
 
 source:
   url: https://pypi.io/packages/source/d/discretize/discretize-{{ version }}.tar.gz
-  sha256: b90ba8ab32c4009c4b6af1962f27a15bc69d47b4d752eaf71c033be0551d2387
+  sha256: 734e1ed460d532601f03af446a5229664606b2269e1b1f7cba646eb19cf4dd0f
 
 build:
-  number: 1
-  script: "{{ PYTHON }} -m pip install . --no-deps -vv"
-  skip: True  # [py2k]
+  number: 0
+  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  skip: true  # [py2k]
 
 requirements:
   build:
@@ -37,7 +37,7 @@ about:
   license: MIT
   license_family: MIT
   license_file: LICENSE
-  summary: "Discretization tools for finite volume and inverse problems"
+  summary: Discretization tools for finite volume and inverse problems
 
 extra:
   recipe-maintainers:
