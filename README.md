@@ -5,7 +5,7 @@ Home: http://github.com/simpeg/discretize
 
 Package license: MIT
 
-Feedstock license: BSD 3-Clause
+Feedstock license: BSD-3-Clause
 
 Summary: Discretization tools for finite volume and inverse problems
 
