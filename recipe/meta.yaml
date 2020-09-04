@@ -1,4 +1,4 @@
-{% set version = "0.5.0" %}
+{% set version = "0.5.1" %}
 
 package:
   name: discretize
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/d/discretize/discretize-{{ version }}.tar.gz
-  sha256: 81c5c6f48cb09e5eb66eaa65f3f553a9900a53281dd8b09092f007b646c3bfdc
+  sha256: 8638e8b1c836bce486b6ab6675d058a10f97da2d6501d868e8446d74ce1fcb69
 
 build:
   number: 0
