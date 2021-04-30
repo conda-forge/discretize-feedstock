@@ -1,4 +1,4 @@
-{% set version = "0.6.3" %}
+{% set version = "0.7.0" %}
 
 package:
   name: discretize
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/d/discretize/discretize-{{ version }}.tar.gz
-  sha256: ad244b58bc910b28ceb9dadf661141c0c2bf2c875cd4e965f9ebeb94cd92b879
+  sha256: f8d0c9e3718d535ee72abbfa74f7d18d2234bba016abcecb5c46e2c4a79011f4
 
 build:
   number: 0
@@ -18,15 +18,12 @@ requirements:
     - {{ compiler('cxx') }}
   host:
     - python
-    - pip
     - numpy
     - cython >=0.2
   run:
     - python
     - {{ pin_compatible('numpy') }}
     - scipy >=0.13
-    - properties
-    - vectormath
 
 test:
   imports:
