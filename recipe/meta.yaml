@@ -18,6 +18,7 @@ requirements:
     - {{ compiler('cxx') }}
   host:
     - python
+    - pip
     - numpy
     - cython >=0.2
   run:
