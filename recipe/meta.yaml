@@ -34,6 +34,8 @@ requirements:
 test:
   imports:
     - discretize
+  commands:
+     python -c "import discretize; print(discretize.__version__)"
 
 about:
   home: http://github.com/simpeg/discretize
