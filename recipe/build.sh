@@ -1,8 +1,10 @@
+set -ex
+
 mkdir builddir
 
-# need to run meson first for cross-compilation case
-${PYTHON} $(which meson) setup ${MESON_ARGS} \
-    builddir || (cat builddir/meson-logs/meson-log.txt && exit 1)
+meson ${MESON_ARGS} builddir/
 
-${PYTHON} -m build --wheel --no-isolation --skip-dependency-check -Cbuilddir=builddir
-${PYTHON} -m pip install dist/discretize*.whl
+# ${PYTHON} -m build --wheel --no-isolation --skip-dependency-check -Cbuilddir=builddir
+# ${PYTHON} -m pip install dist/discretize*.whl
+
+${PYTHON} -m pip install --no-deps -vv --no-build-isolation .
