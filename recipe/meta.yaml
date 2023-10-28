@@ -10,7 +10,7 @@ source:
 
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  script: {{ PYTHON }} -m pip install --no-deps -vv --no-build-isolations .
 
 requirements:
   build:
@@ -22,14 +22,16 @@ requirements:
     - pybind11                               # [build_platform != target_platform]
   host:
     - python
+    - python-build
     - pip
+    - cython >=0.29.35,!=3.0.3
+    - meson-python
     - numpy
-    - cython >=0.2
     - setuptools_scm
   run:
     - python
     - {{ pin_compatible('numpy') }}
-    - scipy >=0.13
+    - scipy >=1.8
 
 test:
   imports:
