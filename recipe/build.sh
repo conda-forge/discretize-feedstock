@@ -2,9 +2,8 @@ set -ex
 
 mkdir builddir
 
-meson setup ${MESON_ARGS} --vsenv builddir/
+export PKG_CONFIG_PATH=$(numpy-config --pkgconfigdir):${PKG_CONFIG_PATH}
 
-# ${PYTHON} -m build --wheel --no-isolation --skip-dependency-check -Cbuilddir=builddir
-# ${PYTHON} -m pip install dist/discretize*.whl
+meson setup ${MESON_ARGS} builddir/
 
 ${PYTHON} -m pip install --no-deps -vv --no-build-isolation --config-settings=builddir="builddir" .
