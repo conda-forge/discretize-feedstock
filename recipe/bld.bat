@@ -1,2 +1,4 @@
 @echo on
-%PYTHON% -m pip install --no-deps -vv --no-build-isolation .
+%PYTHON% -m build --wheel --no-isolation --skip-dependency-check -Csetup-args="--vsenv"
+
+FOR %%i in (dist\discretize*.whl) DO %PYTHON% -m pip install %%i
