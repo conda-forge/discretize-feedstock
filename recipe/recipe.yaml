@@ -13,7 +13,7 @@ source:
 
 build:
   number: 0
-  skip: match(python, "<3.11")
+  skip: match(python, "<3.11") or (match(python, "=3.14") and linux and is_freethreading and (aarch64 or ppc64le))
 
 requirements:
   build:

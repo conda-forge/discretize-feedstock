@@ -91,12 +91,6 @@ description = "Build discretize-feedstock with variant linux_aarch64_is_freethre
 [tasks."inspect-linux_aarch64_is_freethreadingtruepython3.13.____cp313t"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_is_freethreadingtruepython3.13.____cp313t.yaml"
 description = "List contents of discretize-feedstock packages built for variant linux_aarch64_is_freethreadingtruepython3.13.____cp313t"
-[tasks."build-linux_aarch64_is_freethreadingtruepython3.14.____cp314t"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_is_freethreadingtruepython3.14.____cp314t.yaml"
-description = "Build discretize-feedstock with variant linux_aarch64_is_freethreadingtruepython3.14.____cp314t directly (without setup scripts)"
-[tasks."inspect-linux_aarch64_is_freethreadingtruepython3.14.____cp314t"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_is_freethreadingtruepython3.14.____cp314t.yaml"
-description = "List contents of discretize-feedstock packages built for variant linux_aarch64_is_freethreadingtruepython3.14.____cp314t"
 [tasks."build-linux_ppc64le_is_freethreadingfalsepython3.11.____cpython"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/linux_ppc64le_is_freethreadingfalsepython3.11.____cpython.yaml"
 description = "Build discretize-feedstock with variant linux_ppc64le_is_freethreadingfalsepython3.11.____cpython directly (without setup scripts)"
@@ -127,12 +121,6 @@ description = "Build discretize-feedstock with variant linux_ppc64le_is_freethre
 [tasks."inspect-linux_ppc64le_is_freethreadingtruepython3.13.____cp313t"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_ppc64le_is_freethreadingtruepython3.13.____cp313t.yaml"
 description = "List contents of discretize-feedstock packages built for variant linux_ppc64le_is_freethreadingtruepython3.13.____cp313t"
-[tasks."build-linux_ppc64le_is_freethreadingtruepython3.14.____cp314t"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_ppc64le_is_freethreadingtruepython3.14.____cp314t.yaml"
-description = "Build discretize-feedstock with variant linux_ppc64le_is_freethreadingtruepython3.14.____cp314t directly (without setup scripts)"
-[tasks."inspect-linux_ppc64le_is_freethreadingtruepython3.14.____cp314t"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_ppc64le_is_freethreadingtruepython3.14.____cp314t.yaml"
-description = "List contents of discretize-feedstock packages built for variant linux_ppc64le_is_freethreadingtruepython3.14.____cp314t"
 [tasks."build-osx_64_is_freethreadingfalsepython3.11.____cpython"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_is_freethreadingfalsepython3.11.____cpython.yaml"
 description = "Build discretize-feedstock with variant osx_64_is_freethreadingfalsepython3.11.____cpython directly (without setup scripts)"
