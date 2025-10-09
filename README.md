@@ -9,6 +9,10 @@ Package license: MIT
 
 Summary: Discretization tools for finite volume and inverse problems
 
+Development: https://github.com/simpeg/discretize
+
+Documentation: https://discretize.simpeg.xyz/
+
 Current build status
 ====================
 
