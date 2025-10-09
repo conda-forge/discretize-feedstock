@@ -13,7 +13,7 @@ source:
 
 build:
   number: 0
-  skip: true #[py<311]
+  skip: true # [py<311]
 
 requirements:
   build:
@@ -21,9 +21,9 @@ requirements:
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - cython                                 # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
-    - meson-python                           # [build_platform != target_platform]
     - ninja                                  # [build_platform != target_platform]
     - pkg-config                             # [build_platform != target_platform]
+    - meson-python                           # [build_platform != target_platform]
     - ${{ stdlib('c') }}
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
