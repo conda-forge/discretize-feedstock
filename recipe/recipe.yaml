@@ -1,5 +1,5 @@
 context:
-  version: "0.12.0"
+  version: "0.13.0"
   # ensure is_freethreading gets detected as a used variable
   touch_is_freethreading: ${{ is_freethreading }}
 
@@ -9,11 +9,32 @@ package:
 
 source:
   url: https://pypi.org/packages/source/d/discretize/discretize-${{ version }}.tar.gz
-  sha256: 5b6fce19bd9e7a1d82db4ba7de41a95d178fc504a9169f6009bc2e3a386a8b44
+  sha256: eeb2ca7cf2c43b86842ed517a3e31281eaf464a97098b5c0b3f64a789f197fc0
 
 build:
-  number: 1
-  skip: match(python, "<3.11") or (match(python, "=3.14") and linux and is_freethreading and (aarch64 or ppc64le))
+  number: 0
+  skip:
+    - match(python, "<" ~ python_min)
+    # the abi3 build is made once on python_min and covers every later (non-freethreading) python
+    - is_abi3 and not match(python, python_min ~ ".*")
+    - match(python, "=3.14") and linux and is_freethreading and (aarch64 or ppc64le)
+  python:
+    version_independent: ${{ is_abi3 }}
+  script:
+    - if: unix
+      then:
+        # configure with meson directly so ${MESON_ARGS} (the cross file for osx-arm64, linux-aarch64 and linux-ppc64le) is used
+        - mkdir builddir
+        - export PKG_CONFIG_PATH=$(numpy-config --pkgconfigdir):${PKG_CONFIG_PATH}
+        - if: is_abi3
+          then: meson setup ${MESON_ARGS} builddir/
+          # Cython can't target the free-threaded stable ABI (abi3t) yet, so those builds opt out of the limited API
+          else: meson setup ${MESON_ARGS} -Dpython.allow_limited_api=false builddir/
+        - ${{ PYTHON }} -m pip install . --no-deps -vv --no-build-isolation --config-settings=builddir=builddir
+      else:
+        - if: is_abi3
+          then: ${{ PYTHON }} -m pip install . --no-deps -vv --no-build-isolation
+          else: ${{ PYTHON }} -m pip install . --no-deps -vv --no-build-isolation -Csetup-args=-Dpython.allow_limited_api=false
 
 requirements:
   build:
@@ -21,36 +42,52 @@ requirements:
       then:
         - python
         - cross-python_${{ target_platform }}
-        - cython
+        - cython >=3.1.0
         - numpy
         - ninja
         - pkg-config
-        - meson-python
+        - meson-python >=0.21.0
     - ${{ stdlib('c') }}
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
   host:
+    - if: is_abi3
+      then: python-abi3
+    - python
     - pip
-    - meson-python
+    - meson-python >=0.21.0
     - ninja
     - pkg-config
-    - python
-    - python-build
-    - cython
+    - cython >=3.1.0
     - numpy
     - setuptools_scm >=6.2
   run:
-    - python
-    - numpy >=1.22.4
+    - python >=${{ python_min }}
+    - numpy >=1.26.0
     - scipy >=1.12
 
 tests:
   - python:
       imports:
         - discretize
+      python_version:
+        - if: is_abi3
+          then: ${{ python_min }}.*
+        - "*"
   - script:
       - python -c "import discretize; print(discretize.__version__)"
       - python -c "from importlib.metadata import version; print(version('discretize'))"
+  - if: is_abi3
+    then:
+      requirements:
+        run:
+          - abi3audit
+      script:
+        - if: unix
+          then:
+            - abi3audit $SP_DIR/discretize/_extensions/*.abi3.so -s -v --assume-minimum-abi3 ${{ python_min }}
+          else:
+            - for %%f in (%SP_DIR%\discretize\_extensions\*.pyd) do abi3audit "%%f" -s -v --assume-minimum-abi3 ${{ python_min }}
 
 about:
   homepage: http://github.com/simpeg/discretize
