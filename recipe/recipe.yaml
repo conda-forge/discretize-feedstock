@@ -21,10 +21,20 @@ build:
   python:
     version_independent: ${{ is_abi3 }}
   script:
-    - if: is_abi3
-      then: ${{ PYTHON }} -m pip install . --no-deps -vv --no-build-isolation
-      # Cython can't target the free-threaded stable ABI (abi3t) yet, so those builds opt out of the limited API
-      else: ${{ PYTHON }} -m pip install . --no-deps -vv --no-build-isolation -Csetup-args=-Dpython.allow_limited_api=false
+    - if: unix
+      then:
+        # configure with meson directly so ${MESON_ARGS} (the cross file for osx-arm64, linux-aarch64 and linux-ppc64le) is used
+        - mkdir builddir
+        - export PKG_CONFIG_PATH=$(numpy-config --pkgconfigdir):${PKG_CONFIG_PATH}
+        - if: is_abi3
+          then: meson setup ${MESON_ARGS} builddir/
+          # Cython can't target the free-threaded stable ABI (abi3t) yet, so those builds opt out of the limited API
+          else: meson setup ${MESON_ARGS} -Dpython.allow_limited_api=false builddir/
+        - ${{ PYTHON }} -m pip install . --no-deps -vv --no-build-isolation --config-settings=builddir=builddir
+      else:
+        - if: is_abi3
+          then: ${{ PYTHON }} -m pip install . --no-deps -vv --no-build-isolation
+          else: ${{ PYTHON }} -m pip install . --no-deps -vv --no-build-isolation -Csetup-args=-Dpython.allow_limited_api=false
 
 requirements:
   build:
