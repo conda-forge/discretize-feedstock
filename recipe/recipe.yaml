@@ -1,5 +1,5 @@
 context:
-  version: "0.12.0"
+  version: "0.13.0"
   # ensure is_freethreading gets detected as a used variable
   touch_is_freethreading: ${{ is_freethreading }}
 
@@ -9,10 +9,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/d/discretize/discretize-${{ version }}.tar.gz
-  sha256: 5b6fce19bd9e7a1d82db4ba7de41a95d178fc504a9169f6009bc2e3a386a8b44
+  sha256: eeb2ca7cf2c43b86842ed517a3e31281eaf464a97098b5c0b3f64a789f197fc0
 
 build:
-  number: 1
+  number: 0
   skip: match(python, "<3.11") or (match(python, "=3.14") and linux and is_freethreading and (aarch64 or ppc64le))
 
 requirements:
